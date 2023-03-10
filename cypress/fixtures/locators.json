@@ -1,0 +1,20 @@
+{
+    "loginPage":{
+        "loginButton": "a[href='/login']",
+        "submitButton": "button"
+    },
+    "registerPage": {
+        "registerButton": "a[href='/register']",
+        "firstNameInput": "#first-name",
+        "lastNameInput": "#last-name",
+        "passwordConfirmationInput": "#password-confirmation",
+        "termCheckBox": ".form-check-input",
+        "submitButton": "button[type='submit']"
+    },
+    "commonElements": {
+        "emailInput": "#email",
+        "passwordInput": "#password"
+    }
+    
+    
+}

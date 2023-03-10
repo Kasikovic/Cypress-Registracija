@@ -9,7 +9,7 @@ describe("Register tests", () => {
      cy.get("#email").type("pericaperic9@gmail.com");
      cy.get("#password").type("perica123");
      cy.get("#password-confirmation").type("perica123");
-     cy.get(".form-check-input").click();
+     cy.get(".form-check-input").check();
      cy.get("button[type='submit']").click();
      cy.url().should("not.contain", "/register");
     })
@@ -21,7 +21,7 @@ describe("Register tests", () => {
         cy.get("#email").type("pericaperic9@gmail.com");
         cy.get("#password").type("perica123");
         cy.get("#password-confirmation").type("perica123");
-        cy.get(".form-check-input").click();
+        cy.get(".form-check-input").check();
         cy.get("button[type='submit']").click();
         cy.url().should("contain", "/register");
     })
@@ -33,7 +33,7 @@ describe("Register tests", () => {
         cy.get("#email").type("pericaperic9@gmail.com");
         cy.get("#password").type("perica123");
         cy.get("#password-confirmation").type("perica123");
-        cy.get(".form-check-input").click();
+        cy.get(".form-check-input").check();
         cy.get("button[type='submit']").click();
         cy.url().should("contain", "/register");
     })
@@ -45,7 +45,7 @@ describe("Register tests", () => {
         cy.get("#last-name").type("Peric");
         cy.get("#password").type("perica123");
         cy.get("#password-confirmation").type("perica123");
-        cy.get(".form-check-input").click();
+        cy.get(".form-check-input").check();
         cy.get("button[type='submit']").click();
         cy.url().should("contain", "/register");
     })
@@ -57,7 +57,7 @@ describe("Register tests", () => {
         cy.get("#last-name").type("Peric");
         cy.get("#email").type("pericaperic9@gmail.com");
         cy.get("#password-confirmation").type("perica123");
-        cy.get(".form-check-input").click();
+        cy.get(".form-check-input").check();
         cy.get("button[type='submit']").click();
         cy.url().should("contain", "/register");
     })
@@ -69,7 +69,7 @@ describe("Register tests", () => {
         cy.get("#last-name").type("Peric");
         cy.get("#email").type("pericaperic9@gmail.com");
         cy.get("#password").type("perica123");
-        cy.get(".form-check-input").click();
+        cy.get(".form-check-input").check();
         cy.get("button[type='submit']").click();
         cy.url().should("contain", "/register");
     })
