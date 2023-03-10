@@ -16,15 +16,15 @@ class CreateGalleryPage {
     }
 
     get moveUpButton() {
-        return cy.get(":button".eq(0));
+        return cy.get(":button").eq(0);
     }
 
     get moveDownButton() {
-        return cy.get(":button".eq(1));
+        return cy.get(":button").eq(1);
     }
 
     get addImageButton() {
-        return cy.get(":button".eq(2));
+        return cy.get(":button").eq(2);
     }
 
     get submitButton() {

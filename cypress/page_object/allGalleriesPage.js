@@ -21,3 +21,5 @@ class AllGalleriesPage {
         this.loadMoreButton.click();
     }
 }
+
+export const allGalleriesPage = new AllGalleriesPage();

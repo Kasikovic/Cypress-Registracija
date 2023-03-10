@@ -12,4 +12,5 @@ describe("login tests using POM", () => {
     loginPage.login("pericaperic9@gmail.com", "perica123");
     cy.url().should("not.contain", "/login");
   });
+  
 });

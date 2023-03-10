@@ -6,7 +6,7 @@ describe("Register tests", () => {
      cy.get("a[href='/register']").click();
      cy.get("#first-name").type("Perica");
      cy.get("#last-name").type("Peric");
-     cy.get("#email").type("pericaperic9@gmail.com");
+     cy.get("#email").type("pericaperic111@gmail.com");
      cy.get("#password").type("perica123");
      cy.get("#password-confirmation").type("perica123");
      cy.get(".form-check-input").check();
