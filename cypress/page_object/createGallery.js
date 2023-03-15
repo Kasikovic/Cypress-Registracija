@@ -1,44 +1,54 @@
-class CreateGalleryPage {
-    get createGalleryLink() {
-        return cy.get("a[href= '/create']");
+class createGalleryPage {
+    get createGalleryHeading() {
+      return cy.get("h1");
     }
-
-    get titleInput() {
-        return cy.get("#title");
+  
+    get galleryTitleInput() {
+      return cy.get("#title");
     }
-
-    get descriptionInput() {
-        return cy.get("#description");
+  
+    get galleryDescriptionInput() {
+      return cy.get("#description");
     }
-
-    get imageInput() {
-        return cy.get(":url");
+  
+    get galleryImageInput() {
+      return cy.get("input").last();
     }
-
-    get moveUpButton() {
-        return cy.get(":button").eq(0);
+  
+    get cancelButton() {
+      return cy.get("button").last();
     }
-
-    get moveDownButton() {
-        return cy.get(":button").eq(1);
-    }
-
-    get addImageButton() {
-        return cy.get(":button").eq(2);
-    }
-
+  
     get submitButton() {
-        return cy.get(":submit");
+      return cy.get("button").eq(-2);
     }
-
-    createGallery(title, description, url) {
-        this.titleInput.type(title);
-        this.descriptionInput.type(description);
-        this.imageInput.type(url);
-        this.moveUpButton.click();
-        this.moveDownButton.click();
-        this.submitButton.click();
+  
+    get addImageButton() {
+      return cy.get("button").eq(-3);
     }
-}
-
-export const createGalleryPage = new CreateGalleryPage();
+  
+    get imageUrlInputWrapper() {
+      return cy.get("div[class='input-group mb-3']");
+    }
+  
+    get deleteGalleryButton() {
+      return this.imageUrlInputWrapper.find("button").first();
+    }
+  
+    get galleryUpButton() {
+      return this.imageUrlInputWrapper.find("button").eq(1);
+    }
+  
+    get galleryDownButton() {
+      return this.imageUrlInputWrapper.find("button").eq(2);
+    }
+  
+    createGallery(title, description, imageUrl) {
+      this.galleryTitleInput.type(title);
+      this.galleryDescriptionInput.type(description);
+      this.galleryImageInput.type(imageUrl);
+      this.submitButton.click();
+    }
+  }
+  
+  export const createGalleryPage = new createGalleryPage();

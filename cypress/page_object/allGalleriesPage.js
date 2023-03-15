@@ -1,25 +1,67 @@
 class AllGalleriesPage {
-    get allGalleriesLink() {
-        return cy.get(".nav-link nav-buttons router-link-exact-active router-link-active");
+    get loadMore() {
+      return cy.get("button");
     }
-
+  
+    get allGalleriesHeading() {
+      return cy.get("h1");
+    }
+  
     get searchInput() {
-        return cy.get(".form-control");
+      return cy.get("input[aria-describedby='basic-addon2']");
     }
-
+  
     get filterButton() {
-        return cy.get(".btn btn-outline-secondary input-button");
+      return cy.get("button").first();
     }
-
+  
     get loadMoreButton() {
-        return cy.get(".btn btn-custom");
+      return cy.get("button").last();
+    }
+  
+    get galleriesGrid() {
+      return cy.get(".grid");
+    }
+  
+    get singleGallery() {
+      return cy.get(".cell").first();
+    }
+  
+    get singleGalleryHeading() {
+      return this.singleGallery.find("h2");
+    }
+  
+    get singleGalleyAuthor() {
+      return this.singleGallery.find("p");
+    }
+  
+    get singleGalleryDate() {
+      return this.singleGallery.find("small");
+    }
+  
+    get singleGalleryImage() {
+      return this.singleGallery.find("img");
     }
 
-    allGalleries(search) {
-        this.searchInput.type(search);
-        this.filterButton.click();
-        this.loadMoreButton.click();
+    get galleryComments() {
+      return cy.get(".comments-section")
     }
-}
 
-export const allGalleriesPage = new AllGalleriesPage();
+    get galleryCommentsArea() {
+      return cy.get(".form-group")
+    }
+    
+    get submitButton() {
+      return cy.get("button")
+    }
+    get deleteButton() {
+      return this.galleryComments.find("i")
+    }
+  
+    search(searchTerm) {
+      this.searchInput.type(searchTerm);
+      this.filterButton.click();
+    }
+  }
+  
+  export const allGalleriesPage = new AllGalleriesPage();
