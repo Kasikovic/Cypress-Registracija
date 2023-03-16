@@ -1,4 +1,8 @@
-class createGalleryPage {
+class CreateGalleryPage {
+    get createGalleryLink() {
+      return cy.get("a[href='/create']")
+    }
+
     get createGalleryHeading() {
       return cy.get("h1");
     }
@@ -51,4 +55,4 @@ class createGalleryPage {
     }
   }
   
-  export const createGalleryPage = new createGalleryPage();
+  export const createGalleryPage = new CreateGalleryPage();

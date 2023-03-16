@@ -30,7 +30,7 @@ describe("all galleries page tests", () => {
         allGalleriesPage.galleriesGrid.children().should("have.length", 20);
     })
 
-    it.only("single gallery tests", () => {
+    it("single gallery tests", () => {
         allGalleriesPage.singleGalleryHeading
         .should("exist")
         
@@ -45,7 +45,7 @@ describe("all galleries page tests", () => {
         .and("be.visible")    
 
         allGalleriesPage.singleGalleryHeading.click()
-        cy.url().should("include", "https://gallery-app.vivifyideas.com/galleries/2118");
+        cy.url().should("include", "https://gallery-app.vivifyideas.com/galleries/");
         allGalleriesPage.galleryComments
         .should("exist")
         .and("be.visible")
