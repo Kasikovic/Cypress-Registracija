@@ -35,7 +35,7 @@ class CreateGalleryPage {
       return cy.get("div[class='input-group mb-3']");
     }
   
-    get deleteGalleryButton() {
+    get deleteGalleryUrl() {
       return this.imageUrlInputWrapper.find("button").first();
     }
   
@@ -46,6 +46,15 @@ class CreateGalleryPage {
     get galleryDownButton() {
       return this.imageUrlInputWrapper.find("button").eq(2);
     }
+
+    get editGalleryButton() {
+     return cy.get();
+    }
+
+    get errorMessage() {
+      return cy.get(".alert-danger")
+    }
+    
   
     createGallery(title, description, imageUrl) {
       this.galleryTitleInput.type(title);
