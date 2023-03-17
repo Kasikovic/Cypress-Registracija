@@ -21,8 +21,19 @@ describe("login tests using POM", () => {
     cy.get(".nav-link").should("have.length", 3);
   });
 
-  it("login with valid credentials", () => {
-    loginPage.login("pericaperic11@gmail.com", "test12345");
+  it.only("login with valid credentials", () => {
+    cy.intercept({
+      method: "POST",
+      url: `${Cypress.env("apiUrl")}/auth/login`,
+    }).as("validLogin");
+
+    loginPage.login("nedovic.filip@gmail.com", "Test12345");
+    cy.wait("@validLogin").then((interception) => {
+      console.log(interception);
+      expect(interception.response.statusCode).not.to.be.equal(401);
+      expect(interception.response.statusCode).to.be.equal(200);
+      expect(interception.response.body.access_token).to.exist;
+    });
     cy.url().should("not.contain", "/login");
   });
 });
