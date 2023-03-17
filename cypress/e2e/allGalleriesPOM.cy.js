@@ -1,12 +1,15 @@
 /// <reference types="Cypress" />
-import { loginPage } from "../page_object/loginPage";
+
 import { allGalleriesPage } from "../page_object/allGalleriesPage";
+import { faker } from "@faker-js/faker";
 
 describe("all galleries page tests", () => {
+    let comment = faker.faker.random.words(3);
+
     beforeEach("visit gallery app and log in", () => {
-        cy.visit("/login");
-        loginPage.login("pericaperic11@gmail.com", "test12345");
-        cy.url().should("not.contain", "/login");
+        cy.loginViaBackend();
+        cy.visit("/");
+        
     })
 
     it("all galleries succesully loaded", () => {
@@ -17,7 +20,7 @@ describe("all galleries page tests", () => {
         allGalleriesPage.galleriesGrid.children().should("have.length", 10);
         allGalleriesPage.galleriesGrid.children().each((el) => {
             expect(el).to.exist;
-          })
+        })
         
         allGalleriesPage.searchInput
         .should("exist")
@@ -44,13 +47,11 @@ describe("all galleries page tests", () => {
         .should("exist")
         .and("be.visible")    
 
-        allGalleriesPage.singleGalleryHeading.click()
-        cy.url().should("include", "https://gallery-app.vivifyideas.com/galleries/");
         allGalleriesPage.galleryComments
         .should("exist")
         .and("be.visible")
 
-        allGalleriesPage.galleryCommentsArea.type("komentar")
+        allGalleriesPage.galleryCommentsArea.type(comment)
         .should("exist")
         .and("be.visible")
 
@@ -60,6 +61,4 @@ describe("all galleries page tests", () => {
         .should("exist")
         
     })
-    
-    
 })

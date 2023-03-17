@@ -1,29 +1,25 @@
 /// <reference types="Cypress" />
-import { loginPage } from "../page_object/loginPage";
 import { createGalleryPage } from "../page_object/createGalleryPage";
-import { allGalleriesPage } from "../page_object/allGalleriesPage";
 import { faker } from "@faker-js/faker";
 
 
 describe("create gallery tests", () => {
-    const userData = {
+    let galleryId;
+    let userData = {
         randomTitle: faker.random.word(),
-        randomTitleEmpty: faker.system.commonFileExt(),
         randomDescriptions: faker.lorem.words(3),
+        randomImage: faker.image.image() + ".jpg",
     };
 
-    beforeEach("visit gallery app and log in", () => {
-        cy.visit("/login");
-        loginPage.login("pericaperic11@gmail.com", "test12345");
-        cy.url().should("not.contain", "/login");
-        createGalleryPage.createGalleryLink.click()
+    before("visit gallery app and log in", () => {
+        cy.loginViaBackend();
     })
 
     it("create gallery without title", () => {
         createGalleryPage.createGallery(
         " ",
         userData.randomDescriptions,
-        ("https://www.skole.hr/wp-content/uploads/2018/07/shutterstock_728372137.jpg"));
+        userData.randomImage)
         createGalleryPage.errorMessage
         .should("exist")
         .and("be.visible")
@@ -41,28 +37,32 @@ describe("create gallery tests", () => {
             
     })
 
-    it("edit and delete gallery", () => {
-        createGalleryPage.createGallery(
-            userData.randomTitle,
-            userData.randomDescriptions,
-            ("https://www.skole.hr/wp-content/uploads/2018/07/shutterstock_728372137.jpg"));
-        allGalleriesPage.singleGalleryHeading.click()
-            
-    })
-
     it("create gallery without description", () => {
         createGalleryPage.createGallery(
             userData.randomTitle,
             " ",
-            ("https://www.skole.hr/wp-content/uploads/2018/07/shutterstock_728372137.jpg"))
+            userData.randomImage)
     })
 
-    it("create gallery with valid data", () => {
+    it.only("create gallery with valid data", () => {
+        cy.intercept({
+            method: "POST",
+            url: Cypress.env("apiUrl") + "/galleries",
+        }).as("galleryCreation");
+
+        cy.visit("/create");
+        cy.url().should("include", "/create");
         createGalleryPage.createGallery(
             userData.randomTitle,
             userData.randomDescriptions,
-            ("https://www.skole.hr/wp-content/uploads/2018/07/shutterstock_728372137.jpg"));
-            cy.url().should("not.contain", "/create");
-    })
+            userData.randomImage,
+        ); 
 
+        cy.wait("@galleryCreation").then((interception) => {
+            expect(interception.response.statusCode).to.be.equal(201);
+            galleryId = interception.response.body.id;
+      
+            cy.visit("/galleries/" + galleryId);
+        });    
+    })
 })

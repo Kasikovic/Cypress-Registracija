@@ -47,10 +47,6 @@ class CreateGalleryPage {
       return this.imageUrlInputWrapper.find("button").eq(2);
     }
 
-    get editGalleryButton() {
-     return cy.get();
-    }
-
     get errorMessage() {
       return cy.get(".alert-danger")
     }
